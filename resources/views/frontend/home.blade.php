@@ -792,15 +792,24 @@
    ═══════════════════════════════════════════ */
 .testimonials-section {
     padding: 6rem 0;
-    background: var(--bg-soft);
+    background: var(--navy);
     position: relative;
+    overflow: hidden;
 }
 .testimonials-section::before {
     content: '';
     position: absolute; inset: 0;
-    background: radial-gradient(ellipse 600px 400px at 30% 50%, rgba(37,99,235,0.03) 0%, transparent 60%);
+    background:
+        radial-gradient(ellipse 700px 450px at 20% 20%, rgba(37,99,235,0.08) 0%, transparent 60%),
+        radial-gradient(ellipse 500px 400px at 80% 80%, rgba(245,158,11,0.05) 0%, transparent 60%);
     pointer-events: none;
 }
+.testimonials-section .section-heading { color: var(--white); }
+.testimonials-section .section-heading .highlight { color: var(--gold); }
+.testimonials-section .section-sub { color: rgba(255,255,255,0.5); }
+.testimonials-section .section-eyebrow { color: #93C5FD; }
+.testimonials-section .section-eyebrow::before { background: #93C5FD; }
+
 .test-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
@@ -810,25 +819,56 @@
     padding: 0 1.5rem;
 }
 .test-card {
-    background: var(--white);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
     border-radius: var(--r-lg);
-    border: 1px solid var(--border);
+    border: 1px solid rgba(255,255,255,0.08);
     padding: 2rem;
-    box-shadow: var(--shadow-sm);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
     position: relative;
+    overflow: hidden;
 }
 .test-card::before {
-    content: '\201C';
+    content: '';
+    position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(37,99,235,0.15), rgba(124,58,237,0.15), rgba(245,158,11,0.1), rgba(255,255,255,0.06));
+    background-size: 400% 400%;
+    animation: testBorderShift 6s ease-in-out infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+@keyframes testBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
+.test-card .test-glow {
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.04) 0%, transparent 50%);
+    animation: testShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes testShine {
+    0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; }
+    25%  { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; }
+    50%  { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; }
+    75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
+}
+.test-card:hover {
+    box-shadow: 0 20px 56px rgba(0,0,0,0.3), 0 0 40px rgba(37,99,235,0.06), inset 0 1px 0 rgba(255,255,255,0.1);
+    transform: translateY(-8px);
+    border-color: rgba(37,99,235,0.25);
+    background: rgba(255,255,255,0.06);
+}
+.test-card .test-quote {
     position: absolute; top: 0.25rem; right: 1.5rem;
     font-family: var(--font-serif);
-    font-size: 5rem; color: var(--primary); opacity: 0.1;
-    line-height: 1;
+    font-size: 5rem; color: #60A5FA; opacity: 0.08;
+    line-height: 1; pointer-events: none;
 }
-.test-card:hover { box-shadow: var(--shadow-xl); transform: translateY(-6px); border-color: var(--border-light); }
-.test-card .test-stars { color: var(--gold); margin-bottom: 1rem; font-size: 1.1rem; letter-spacing: 2px; }
-.test-card .test-text { font-size: 0.9375rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; }
-.test-card .test-author { display: flex; align-items: center; gap: 0.75rem; }
+.test-card .test-stars { color: var(--gold); margin-bottom: 1rem; font-size: 1.1rem; letter-spacing: 2px; position: relative; z-index: 1; }
+.test-card .test-text { font-size: 0.9375rem; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 1.25rem; font-style: italic; position: relative; z-index: 1; }
+.test-card .test-author { display: flex; align-items: center; gap: 0.75rem; position: relative; z-index: 1; }
 .test-card .test-avatar {
     width: 2.5rem; height: 2.5rem; border-radius: 50%;
     background: linear-gradient(135deg, var(--primary), #7C3AED);
@@ -836,10 +876,11 @@
     display: flex; align-items: center; justify-content: center;
     font-weight: 700; font-size: 0.875rem;
     transition: transform 0.3s;
+    box-shadow: 0 0 20px rgba(37,99,235,0.2);
 }
 .test-card:hover .test-avatar { transform: scale(1.1); }
-.test-card .test-name { font-size: 0.875rem; font-weight: 600; color: var(--text); }
-.test-card .test-role { font-size: 0.75rem; color: var(--text-muted); }
+.test-card .test-name { font-size: 0.875rem; font-weight: 600; color: #fff; }
+.test-card .test-role { font-size: 0.75rem; color: rgba(255,255,255,0.4); }
 
 /* ═══════════════════════════════════════════
    FAQ
@@ -1151,32 +1192,6 @@
     </div>
 </section>
 
-<!-- ════════ TESTIMONIALS ════════ -->
-<section class="testimonials-section">
-    <div class="section-header centered reveal">
-        <span class="section-eyebrow">What They Say</span>
-        <h2 class="section-heading">Loved by Renters <span class="highlight">and Owners</span></h2>
-        <p class="section-sub">Hear from thousands of satisfied users who found their perfect home through BasaFinder.</p>
-    </div>
-    <div class="test-grid">
-        @forelse($testimonials as $t)
-            <div class="test-card reveal">
-                <div class="test-stars">{{ $t->stars }}</div>
-                <p class="test-text">"{{ $t->content }}"</p>
-                <div class="test-author">
-                    <div class="test-avatar">{{ $t->initial }}</div>
-                    <div><div class="test-name">{{ $t->author_name }}</div><div class="test-role">{{ $t->author_role }}</div></div>
-                </div>
-            </div>
-        @empty
-            <div style="grid-column:1/-1; text-align:center; padding:3rem 1rem;">
-                <h3 style="font-size:1.125rem; font-weight:600; color:var(--text);">No Testimonials Yet</h3>
-                <p style="color:var(--text-muted); font-size:0.875rem;">Check back soon for customer stories.</p>
-            </div>
-        @endforelse
-    </div>
-</section>
-
 <!-- ════════ FAQ ════════ -->
 <section class="faq-section">
     <div class="section-header centered reveal">
@@ -1197,6 +1212,34 @@
             <div style="text-align:center; padding:2rem 1rem;">
                 <h3 style="font-size:1rem; font-weight:600; color:var(--text);">No FAQs Available</h3>
                 <p style="color:var(--text-muted); font-size:0.875rem;">Check back soon for answers.</p>
+            </div>
+        @endforelse
+    </div>
+</section>
+
+<!-- ════════ TESTIMONIALS ════════ -->
+<section class="testimonials-section">
+    <div class="section-header centered reveal">
+        <span class="section-eyebrow">What They Say</span>
+        <h2 class="section-heading">Loved by Renters <span class="highlight">and Owners</span></h2>
+        <p class="section-sub">Hear from thousands of satisfied users who found their perfect home through BasaFinder.</p>
+    </div>
+    <div class="test-grid">
+        @forelse($testimonials as $t)
+            <div class="test-card reveal">
+                <div class="test-glow"></div>
+                <div class="test-quote">"</div>
+                <div class="test-stars">{{ $t->stars }}</div>
+                <p class="test-text">"{{ $t->content }}"</p>
+                <div class="test-author">
+                    <div class="test-avatar">{{ $t->initial }}</div>
+                    <div><div class="test-name">{{ $t->author_name }}</div><div class="test-role">{{ $t->author_role }}</div></div>
+                </div>
+            </div>
+        @empty
+            <div style="grid-column:1/-1; text-align:center; padding:3rem 1rem;">
+                <h3 style="font-size:1.125rem; font-weight:600; color:rgba(255,255,255,0.8);">No Testimonials Yet</h3>
+                <p style="color:rgba(255,255,255,0.4); font-size:0.875rem;">Check back soon for customer stories.</p>
             </div>
         @endforelse
     </div>
