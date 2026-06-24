@@ -964,36 +964,41 @@
 
 /* ───────────── CITIES ───────────── */
 .cities-section { padding: 5rem 0; background: var(--white); position: relative; }
-.cities-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+.cities-grid { display: grid; grid-template-columns: repeat(8, 1fr); gap: 0.875rem; max-width: 1280px; margin: 0 auto; padding: 0 1.5rem; }
+@media (max-width: 1200px) { .cities-grid { grid-template-columns: repeat(4, 1fr); } }
+@media (max-width: 768px) { .cities-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; padding: 0 1rem; } }
 .city-card {
     position: relative;
     border-radius: var(--radius);
     overflow: hidden;
     height: 200px;
     cursor: pointer;
+    text-decoration: none;
     transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
     background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
     display: flex;
     align-items: flex-end;
 }
 .city-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 50px rgba(15,23,42,0.12); }
+.city-card .city-bg-icon { position: absolute; top: 1rem; right: 1rem; width: 3.5rem; height: 3.5rem; opacity: 0.15; z-index: 1; }
 .city-card .city-overlay {
     position: absolute;
     inset: 0;
-    background: linear-gradient(180deg, transparent 30%, rgba(15,23,42,0.9));
+    background: linear-gradient(180deg, transparent 25%, rgba(15,23,42,0.85));
     transition: opacity 0.4s;
 }
-.city-card .city-info { position: relative; z-index: 1; padding: 1.5rem; width: 100%; transform: translateY(0); transition: transform 0.4s; }
+.city-card .city-info { position: relative; z-index: 1; padding: 1.25rem 1.25rem 1.5rem; width: 100%; transform: translateY(0); transition: transform 0.4s; }
 .city-card:hover .city-info { transform: translateY(-4px); }
 .city-card .city-info h3 { color: #fff; font-size: 1.125rem; font-weight: 700; }
-.city-card .city-info p { color: rgba(255,255,255,0.6); font-size: 0.8125rem; margin-top: 0.125rem; }
+.city-card .city-info p { color: rgba(255,255,255,0.55); font-size: 0.75rem; margin-top: 0.125rem; }
 .city-card:nth-child(1) { background: linear-gradient(135deg, #1E3A5F, #2D4A7A); }
 .city-card:nth-child(2) { background: linear-gradient(135deg, #1B5E20, #2E7D32); }
 .city-card:nth-child(3) { background: linear-gradient(135deg, #4A148C, #6A1B9A); }
 .city-card:nth-child(4) { background: linear-gradient(135deg, #E65100, #EF6C00); }
 .city-card:nth-child(5) { background: linear-gradient(135deg, #0F172A, #1E293B); }
 .city-card:nth-child(6) { background: linear-gradient(135deg, #0D47A1, #1565C0); }
-@media (max-width: 640px) { .cities-grid { grid-template-columns: repeat(2, 1fr); gap: 0.75rem; padding: 0 1rem; } .city-card { height: 150px; } }
+.city-card:nth-child(7) { background: linear-gradient(135deg, #00695C, #00897B); }
+.city-card:nth-child(8) { background: linear-gradient(135deg, #880E4F, #AD1457); }
 
 /* ───────────── TESTIMONIALS ───────────── */
 .testimonials-section { padding: 5rem 0; background: var(--bg); position: relative; }
@@ -1423,6 +1428,7 @@
         @foreach($cities as $i => $city)
             @php $count = $divisionCounts[$city] ?? 0; @endphp
             <a href="{{ route('search', ['division' => $city]) }}" class="city-card reveal" style="animation-delay:{{ 0.05 + ($i * 0.05) }}s">
+                <svg class="city-bg-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9.78V6a1 1 0 00-1-1h-2a1 1 0 00-1 1v.24L12 3 2 12h3v7a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-7h3l-3-3.22z"/></svg>
                 <div class="city-overlay"></div>
                 <div class="city-info"><h3>{{ $city }}</h3><p>{{ $count > 0 ? number_format($count) . '+ Properties' : 'Browse Properties' }}</p></div>
             </a>
