@@ -623,21 +623,6 @@
                 </div>
             </div>
 
-            {{-- Location --}}
-            <div class="pd-section">
-                <h3>
-                    <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Location
-                </h3>
-                <div style="background:var(--bg);border-radius:12px;padding:1rem;">
-                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;font-size:0.875rem;">
-                        <div><span style="color:var(--text-muted);">Division:</span> <strong>{{ $property->division }}</strong></div>
-                        <div><span style="color:var(--text-muted);">District:</span> <strong>{{ $property->district }}</strong></div>
-                        <div><span style="color:var(--text-muted);">Area:</span> <strong>{{ $property->area_location }}</strong></div>
-                        <div><span style="color:var(--text-muted);">Full Address:</span> <strong>{{ $property->full_address }}</strong></div>
-                    </div>
-                </div>
-            </div>
         </div>
 
         {{-- Sidebar --}}
