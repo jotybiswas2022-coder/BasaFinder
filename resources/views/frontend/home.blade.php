@@ -1866,6 +1866,7 @@
                     <div class="fc-icon gold"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                     <div class="fc-text"><div class="fc-num">Quick</div><div class="fc-label">Response Time</div></div>
                 </div>
+                <div class="floating-card">
                     <div class="fc-icon blue"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
                     <div class="fc-text"><div class="fc-num">Verified</div><div class="fc-label">Properties Only</div></div>
                 </div>
