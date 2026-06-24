@@ -7,7 +7,15 @@
     <div class="container">
         <div style="text-align:center; margin-bottom:3rem;">
             <h1 style="font-size:2rem; font-weight:700; color:var(--secondary); margin-bottom:0.5rem;">My Messages</h1>
-            <p style="color:var(--text-muted);">Messages sent from <strong>{{ $email }}</strong></p>
+
+            <form method="GET" action="{{ route('contact.my-messages') }}" style="max-width:400px; margin:0 auto 2rem; display:flex; gap:0.5rem;">
+                <input type="email" name="email" placeholder="Enter your email" value="{{ $email }}" required style="flex:1; padding:0.625rem 1rem; border:1px solid var(--border); border-radius:var(--r-sm); font-size:0.875rem; font-family:inherit; outline:none; box-sizing:border-box;">
+                <button type="submit" style="padding:0.625rem 1.25rem; background:var(--primary); color:#fff; border:none; border-radius:var(--r-sm); font-size:0.875rem; font-weight:600; cursor:pointer; font-family:inherit; white-space:nowrap;">Search</button>
+            </form>
+
+            @if($email)
+                <p style="color:var(--text-muted); margin-bottom:2rem;">Messages sent from <strong>{{ $email }}</strong></p>
+            @endif
         </div>
 
         @if($messages->count())
@@ -28,10 +36,9 @@
                     </div>
                 @endforeach
             </div>
-        @else
+        @elseif($email)
             <div style="text-align:center; padding:4rem 0;">
-                <p style="font-size:1.125rem; color:var(--text-muted);">No messages found.</p>
-                <a href="{{ route('home') }}" style="display:inline-block; margin-top:1rem; padding:0.75rem 2rem; background:var(--primary); color:#fff; border-radius:var(--r-md); font-weight:600; text-decoration:none;">Back to Home</a>
+                <p style="font-size:1.125rem; color:var(--text-muted);">No messages found for <strong>{{ $email }}</strong>.</p>
             </div>
         @endif
     </div>
