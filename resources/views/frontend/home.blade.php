@@ -375,7 +375,26 @@
 }
 @keyframes imgGlassPulse { 0%,100% { opacity: 0.3; } 50% { opacity: 0.8; } }
 .hero-image-card:hover .main-img { transform: scale(1.02); }
-.hero-image-card .main-img .placeholder-icon { width: 60%; height: 60%; opacity: 0.1; color: rgba(96,165,250,0.3); }
+.hero-image-card .main-img .placeholder-icon { display: none; }
+.hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
+.hero-scene svg { width: 80%; height: 80%; }
+.hero-scene .person { animation: personBreathe 3s ease-in-out infinite; }
+@keyframes personBreathe { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+.hero-scene .search-glass { animation: searchSweep 4s ease-in-out infinite; transform-origin: 120px 110px; }
+@keyframes searchSweep { 0%,100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+.hero-scene .house-found { animation: houseAppear 2s ease-out forwards, houseFloat 4s ease-in-out 2s infinite; opacity: 0; }
+@keyframes houseAppear { 0% { opacity: 0; transform: scale(0.3) translateY(20px); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
+@keyframes houseFloat { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+.hero-scene .sparkle { animation: sparklePop 2s ease-out 1.5s infinite; opacity: 0; }
+@keyframes sparklePop { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 30% { opacity: 1; transform: scale(1.2) rotate(180deg); } 60% { opacity: 0.6; transform: scale(0.8) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
+.hero-scene .checkmark { animation: checkPop 2s ease-out 2s forwards; opacity: 0; }
+@keyframes checkPop { 0% { opacity: 0; transform: scale(0); } 50% { transform: scale(1.3); } 100% { opacity: 1; transform: scale(1); } }
+.hero-scene .dot-pulse { animation: dotPulse 2s ease-in-out infinite; }
+@keyframes dotPulse { 0%,100% { opacity: 0.2; transform: scale(0.8); } 50% { opacity: 1; transform: scale(1.2); } }
+.hero-scene .search-ray { animation: rayPulse 2s ease-in-out infinite; transform-origin: 120px 110px; }
+@keyframes rayPulse { 0%,100% { opacity: 0.1; transform: scale(0.95); } 50% { opacity: 0.3; transform: scale(1.05); } }
+.hero-scene .found-text { animation: textFadeIn 2s ease-out 2.5s forwards; opacity: 0; }
+@keyframes textFadeIn { 0% { opacity: 0; transform: translateY(10px); } 100% { opacity: 1; transform: translateY(0); } }
 .hero-image-card .floating-card {
     position: absolute;
     background: rgba(15,23,42,0.5);
@@ -1035,7 +1054,90 @@
         <div class="hero-visual">
             <div class="hero-image-card" id="tiltCard">
                 <div class="main-img">
-                    <svg class="placeholder-icon" fill="currentColor" viewBox="0 0 24 24"><path d="M19 9.78V6a1 1 0 00-1-1h-2a1 1 0 00-1 1v.24L12 3 2 12h3v7a1 1 0 001 1h4v-5h4v5h4a1 1 0 001-1v-7h3l-3-3.22z"/></svg>
+                    <div class="hero-scene">
+                        <svg viewBox="0 0 280 210" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background glow -->
+                            <circle cx="140" cy="105" r="90" class="search-ray" fill="url(#heroGlowGrad)" opacity="0.15"/>
+                            <defs>
+                                <radialGradient id="heroGlowGrad"><stop offset="0%" stop-color="#60A5FA"/><stop offset="100%" stop-color="transparent"/></radialGradient>
+                            </defs>
+
+                            <!-- Ground -->
+                            <ellipse cx="140" cy="190" rx="100" ry="8" fill="rgba(96,165,250,0.06)"/>
+
+                            <!-- Person -->
+                            <g class="person">
+                                <!-- Body -->
+                                <rect x="108" y="128" width="24" height="36" rx="6" fill="rgba(96,165,250,0.2)" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
+                                <!-- Head -->
+                                <circle cx="120" cy="112" r="16" fill="rgba(96,165,250,0.15)" stroke="rgba(96,165,250,0.4)" stroke-width="1.5"/>
+                                <!-- Face - eyes -->
+                                <circle cx="115" cy="110" r="1.5" fill="rgba(96,165,250,0.5)"/>
+                                <circle cx="125" cy="110" r="1.5" fill="rgba(96,165,250,0.5)"/>
+                                <!-- Smile -->
+                                <path d="M114 116 Q120 121 126 116" stroke="rgba(96,165,250,0.4)" stroke-width="1.2" fill="none" stroke-linecap="round"/>
+                                <!-- Arm holding glass -->
+                                <path d="M132 138 Q145 130 155 118" stroke="rgba(96,165,250,0.4)" stroke-width="2.5" fill="none" stroke-linecap="round" class="person"/>
+                                <!-- Legs -->
+                                <line x1="114" y1="164" x2="112" y2="186" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="126" y1="164" x2="128" y2="186" stroke="rgba(96,165,250,0.3)" stroke-width="2.5" stroke-linecap="round"/>
+                            </g>
+
+                            <!-- Magnifying Glass -->
+                            <g class="search-glass">
+                                <circle cx="155" cy="115" r="14" stroke="rgba(96,165,250,0.5)" stroke-width="2.5" fill="none"/>
+                                <line x1="165" y1="125" x2="176" y2="136" stroke="rgba(96,165,250,0.4)" stroke-width="2.5" stroke-linecap="round"/>
+                                <!-- Glass shine -->
+                                <path d="M148 108 Q152 104 157 107" stroke="rgba(147,197,253,0.3)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                            </g>
+
+                            <!-- House (found!) -->
+                            <g class="house-found">
+                                <rect x="185" y="148" width="40" height="32" rx="3" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.5)" stroke-width="2"/>
+                                <path d="M180 152 L205 132 L230 152" stroke="rgba(16,185,129,0.5)" stroke-width="2" fill="none" stroke-linejoin="round"/>
+                                <rect x="198" y="160" width="14" height="12" rx="1.5" fill="rgba(16,185,129,0.2)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <!-- Door knob -->
+                                <circle cx="209" cy="167" r="1" fill="rgba(16,185,129,0.4)"/>
+                                <!-- Window -->
+                                <rect x="203" y="150" width="8" height="8" rx="1" fill="rgba(147,197,253,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="0.8"/>
+                                <!-- Chimney -->
+                                <rect x="213" y="134" width="6" height="10" rx="1" fill="rgba(16,185,129,0.15)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <!-- Smoke -->
+                                <circle cx="216" cy="130" r="2" fill="rgba(147,197,253,0.15)" class="dot-pulse"/>
+                                <circle cx="218" cy="126" r="1.5" fill="rgba(147,197,253,0.1)" class="dot-pulse" style="animation-delay:0.5s"/>
+                            </g>
+
+                            <!-- Checkmark -->
+                            <g class="checkmark">
+                                <circle cx="205" cy="140" r="12" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.4)" stroke-width="1.5"/>
+                                <path d="M199 140 L203 144 L211 136" stroke="rgba(16,185,129,0.7)" stroke-width="2.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+                            </g>
+
+                            <!-- Sparkles -->
+                            <text class="sparkle" x="170" y="100" font-size="12" fill="rgba(245,158,11,0.5)" style="animation-delay:1.5s">✦</text>
+                            <text class="sparkle" x="230" y="130" font-size="8" fill="rgba(245,158,11,0.4)" style="animation-delay:1.8s">✦</text>
+                            <text class="sparkle" x="240" y="160" font-size="10" fill="rgba(96,165,250,0.4)" style="animation-delay:2.1s">✦</text>
+
+                            <!-- Found text -->
+                            <g class="found-text">
+                                <rect x="178" y="115" width="54" height="20" rx="10" fill="rgba(16,185,129,0.12)" stroke="rgba(16,185,129,0.3)" stroke-width="1"/>
+                                <text x="205" y="129" text-anchor="middle" font-size="9" font-weight="700" fill="rgba(16,185,129,0.7)" font-family="sans-serif">FOUND!</text>
+                            </g>
+
+                            <!-- Connection line (person to house) -->
+                            <path d="M140 130 Q165 115 190 140" stroke="rgba(96,165,250,0.08)" stroke-width="1.5" stroke-dasharray="4 3" fill="none" class="person"/>
+                            <!-- Dots along path -->
+                            <circle cx="155" cy="122" r="1.5" fill="rgba(96,165,250,0.15)" class="dot-pulse" style="animation-delay:0s"/>
+                            <circle cx="170" cy="120" r="1.5" fill="rgba(96,165,250,0.12)" class="dot-pulse" style="animation-delay:0.8s"/>
+                            <circle cx="182" cy="128" r="1.5" fill="rgba(96,165,250,0.1)" class="dot-pulse" style="animation-delay:1.6s"/>
+
+                            <!-- Decorative dots -->
+                            <circle cx="80" cy="60" r="2" fill="rgba(96,165,250,0.08)" class="dot-pulse" style="animation-delay:0.3s"/>
+                            <circle cx="220" cy="70" r="1.5" fill="rgba(147,197,253,0.06)" class="dot-pulse" style="animation-delay:0.7s"/>
+                            <circle cx="60" cy="150" r="1.5" fill="rgba(147,197,253,0.05)" class="dot-pulse" style="animation-delay:1.1s"/>
+                            <circle cx="250" cy="90" r="2" fill="rgba(96,165,250,0.06)" class="dot-pulse" style="animation-delay:1.4s"/>
+                        </svg>
+                    </div>
                 </div>
                 <div class="floating-card">
                     <div class="fc-icon blue"><svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div>
