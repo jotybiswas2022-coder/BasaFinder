@@ -4,6 +4,8 @@
 
 @push('styles')
 <style>
+body { background: var(--navy); }
+
 /* ─── Animations ─── */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
@@ -18,6 +20,31 @@
 .pd-animate-d2 { animation-delay: 0.2s; }
 .pd-animate-d3 { animation-delay: 0.3s; }
 
+/* ─── Glass Card ─── */
+.glass-card {
+    background: rgba(15,23,42,0.6);
+    backdrop-filter: blur(28px) saturate(1.5);
+    -webkit-backdrop-filter: blur(28px) saturate(1.5);
+    border: 1px solid rgba(96,165,250,0.08);
+    border-radius: var(--r-lg);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.04);
+    transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
+    position: relative;
+    overflow: hidden;
+}
+.glass-card::before {
+    content: '';
+    position: absolute; inset: -2px; border-radius: var(--r-lg);
+    background: conic-gradient(from var(--glass-angle,0deg), transparent, rgba(37,99,235,0.12), rgba(124,58,237,0.12), transparent);
+    animation: glassBorderGlow 6s linear infinite;
+    -webkit-mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1.5px));
+    mask: radial-gradient(farthest-side, transparent calc(100% - 2px), #fff calc(100% - 1.5px));
+    pointer-events: none;
+}
+@property --glass-angle { syntax: '<angle>'; initial-value: 0deg; inherits: false; }
+@keyframes glassBorderGlow { 0% { --glass-angle: 0deg; } 100% { --glass-angle: 360deg; } }
+.glass-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06); transform: translateY(-2px); }
+
 /* ─── Breadcrumb ─── */
 .pd-breadcrumb {
     max-width: 1280px;
@@ -27,11 +54,11 @@
     align-items: center;
     gap: 0.5rem;
     font-size: 0.8125rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.4);
 }
-.pd-breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
-.pd-breadcrumb a:hover { color: var(--primary); }
-.pd-breadcrumb .sep { color: var(--border); }
+.pd-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
+.pd-breadcrumb a:hover { color: var(--accent); }
+.pd-breadcrumb .sep { color: rgba(255,255,255,0.15); }
 
 /* ─── Layout ─── */
 .pd-wrap {
@@ -46,11 +73,11 @@
 }
 .pd-gallery .gallery-main {
     position: relative;
-    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
+    background: linear-gradient(135deg, #1E293B, #0F172A);
     border-radius: 20px;
     overflow: hidden;
     height: 460px;
-    box-shadow: 0 4px 24px rgba(15,23,42,0.08);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
 }
 .pd-gallery .gallery-main img {
     width: 100%;
@@ -62,7 +89,7 @@
     position: absolute;
     bottom: 16px;
     right: 16px;
-    background: rgba(15,23,42,0.7);
+    background: rgba(0,0,0,0.6);
     backdrop-filter: blur(8px);
     color: #fff;
     padding: 0.375rem 0.875rem;
@@ -71,6 +98,7 @@
     font-weight: 500;
     z-index: 2;
     letter-spacing: 0.03em;
+    border: 1px solid rgba(255,255,255,0.06);
 }
 .gallery-badges {
     position: absolute;
@@ -92,16 +120,19 @@
 .gallery-badge.verified { background: rgba(16,185,129,0.9); color: #fff; }
 .gallery-badge.new { background: rgba(37,99,235,0.9); color: #fff; }
 .gallery-badge.type {
-    background: rgba(15,23,42,0.75);
+    background: rgba(0,0,0,0.6);
     color: #fff;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 .pd-gallery .gallery-thumbs {
     display: flex;
     gap: 0.625rem;
     margin-top: 0.75rem;
     padding: 0.75rem;
-    background: var(--white);
-    border: 1px solid var(--border);
+    background: rgba(15,23,42,0.4);
+    backdrop-filter: blur(16px) saturate(1.3);
+    -webkit-backdrop-filter: blur(16px) saturate(1.3);
+    border: 1px solid rgba(96,165,250,0.06);
     border-radius: 14px;
     overflow-x: auto;
 }
@@ -114,16 +145,16 @@
     cursor: pointer;
     border: 2px solid transparent;
     transition: border-color 0.2s, transform 0.2s;
-    background: linear-gradient(135deg, #E2E8F0, #CBD5E1);
-    box-shadow: 0 1px 4px rgba(15,23,42,0.06);
+    background: linear-gradient(135deg, #1E293B, #0F172A);
 }
 .pd-gallery .gallery-thumbs .thumb:hover {
     border-color: var(--primary);
     transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(37,99,235,0.2);
 }
 .pd-gallery .gallery-thumbs .thumb.active {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px var(--primary-light);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
 }
 .pd-gallery .gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 768px) {
@@ -141,16 +172,11 @@
 @media (max-width: 1024px) { .pd-content { grid-template-columns: 1fr; } }
 
 /* ─── Info Panel ─── */
-.pd-info {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 2rem;
-}
+.pd-info { padding: 2rem; }
 .pd-info .pd-title {
     font-size: 1.625rem;
     font-weight: 800;
-    color: var(--secondary);
+    color: #fff;
     margin-bottom: 0.375rem;
     line-height: 1.2;
 }
@@ -158,8 +184,8 @@
     display: inline-block;
     font-size: 0.7rem;
     font-weight: 600;
-    color: var(--primary);
-    background: var(--primary-light);
+    color: var(--accent);
+    background: rgba(96,165,250,0.12);
     padding: 0.15rem 0.5rem;
     border-radius: 4px;
     vertical-align: middle;
@@ -171,7 +197,7 @@
     display: flex;
     align-items: center;
     gap: 0.375rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.4);
     font-size: 0.875rem;
     margin-bottom: 1.25rem;
 }
@@ -190,7 +216,7 @@
 .pd-info .pd-price-row .price small {
     font-size: 0.875rem;
     font-weight: 400;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.3);
 }
 .pd-info .pd-price-row .status {
     padding: 0.25rem 0.75rem;
@@ -198,9 +224,9 @@
     font-size: 0.75rem;
     font-weight: 600;
 }
-.status-approved { background: #D1FAE5; color: #065F46; }
-.status-pending { background: #FEF3C7; color: #92400E; }
-.status-rejected { background: #FEE2E2; color: #991B1B; }
+.status-approved { background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.2); }
+.status-pending { background: rgba(245,158,11,0.15); color: #FBBF24; border: 1px solid rgba(245,158,11,0.2); }
+.status-rejected { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.2); }
 
 /* ─── Meta Grid ─── */
 .pd-meta-grid {
@@ -208,7 +234,8 @@
     flex-wrap: nowrap;
     gap: 0.5rem;
     padding: 1.25rem;
-    background: var(--bg);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.04);
     border-radius: 12px;
     margin-bottom: 1.5rem;
     justify-content: space-around;
@@ -216,8 +243,6 @@
 .pd-meta-item {
     flex: 1;
     min-width: 0;
-}
-.pd-meta-item {
     text-align: center;
     padding: 0.5rem;
 }
@@ -228,11 +253,11 @@
 .pd-meta-item .pm-value {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: #fff;
 }
 .pd-meta-item .pm-label {
     font-size: 0.7rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.35);
     margin-top: 0.125rem;
 }
 
@@ -242,10 +267,10 @@
 .pd-section h3 {
     font-size: 1.0625rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: #fff;
     margin-bottom: 0.875rem;
     padding-bottom: 0.5rem;
-    border-bottom: 2px solid var(--bg);
+    border-bottom: 2px solid rgba(255,255,255,0.04);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -253,12 +278,12 @@
 .pd-section h3 svg { color: var(--primary); }
 .pd-section p, .pd-section li {
     font-size: 0.9375rem;
-    color: var(--text);
+    color: rgba(255,255,255,0.6);
     line-height: 1.75;
 }
 .pd-desc {
     font-size: 0.9375rem;
-    color: var(--text);
+    color: rgba(255,255,255,0.6);
     line-height: 1.75;
     white-space: pre-line;
 }
@@ -273,30 +298,25 @@
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0.75rem;
-    background: var(--bg);
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.04);
     border-radius: 8px;
     font-size: 0.85rem;
 }
-.pd-detail-item .dd-label { color: var(--text-muted); }
-.pd-detail-item .dd-value { font-weight: 600; color: var(--text); }
+.pd-detail-item .dd-label { color: rgba(255,255,255,0.35); }
+.pd-detail-item .dd-value { font-weight: 600; color: rgba(255,255,255,0.75); }
 
 /* ─── Sidebar ─── */
 .pd-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
 
 /* ─── Owner Card ─── */
-.pd-owner-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-    text-align: center;
-}
+.pd-owner-card { padding: 1.5rem; text-align: center; }
 .pd-owner-card .owner-avatar {
     width: 4rem;
     height: 4rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, var(--primary-light), rgba(167,139,250,0.2));
-    color: var(--primary);
+    background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(167,139,250,0.1));
+    color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -304,10 +324,10 @@
     font-size: 1.375rem;
     margin: 0 auto 0.75rem;
 }
-.pd-owner-card h4 { font-size: 1.0625rem; font-weight: 700; color: var(--secondary); margin-bottom: 0.125rem; }
+.pd-owner-card h4 { font-size: 1.0625rem; font-weight: 700; color: #fff; margin-bottom: 0.125rem; }
 .pd-owner-card .owner-label {
     font-size: 0.75rem;
-    color: var(--text-muted);
+    color: rgba(255,255,255,0.35);
     margin-bottom: 0.75rem;
 }
 .pd-owner-card .owner-status {
@@ -315,14 +335,14 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.75rem;
-    color: var(--success);
+    color: #34D399;
     font-weight: 500;
     margin-bottom: 1rem;
 }
 .pd-owner-card .owner-status .dot {
     width: 0.375rem;
     height: 0.375rem;
-    background: var(--success);
+    background: #34D399;
     border-radius: 50%;
     animation: pulse-dot2 2s ease-in-out infinite;
 }
@@ -348,49 +368,39 @@
 .pd-owner-card .owner-contact .btn-call:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
 .pd-owner-card .owner-contact .btn-whatsapp { background: #25D366; color: #fff; }
 .pd-owner-card .owner-contact .btn-whatsapp:hover { background: #1DA851; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,165,82,0.3); }
-.pd-owner-card .owner-contact .btn-email { background: var(--bg); color: var(--text); border: 1px solid var(--border); }
-.pd-owner-card .owner-contact .btn-email:hover { background: var(--primary-light); color: var(--primary); border-color: var(--primary); }
+.pd-owner-card .owner-contact .btn-email { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); }
+.pd-owner-card .owner-contact .btn-email:hover { background: rgba(37,99,235,0.1); color: var(--accent); border-color: rgba(37,99,235,0.2); }
 
 /* ─── Summary Card ─── */
-.pd-summary-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-}
+.pd-summary-card { padding: 1.5rem; }
 .pd-summary-card h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: #fff;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--bg);
+    border-bottom: 2px solid rgba(255,255,255,0.04);
 }
 .pd-summary-row {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0;
     font-size: 0.85rem;
-    color: var(--text-muted);
-    border-bottom: 1px solid var(--border);
+    color: rgba(255,255,255,0.35);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
 }
 .pd-summary-row:last-child { border-bottom: none; }
-.pd-summary-row .sv-value { font-weight: 600; color: var(--text); }
+.pd-summary-row .sv-value { font-weight: 600; color: rgba(255,255,255,0.75); }
 
 /* ─── Location Card ─── */
-.pd-map-card {
-    background: var(--white);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 1.5rem;
-}
+.pd-map-card { padding: 1.5rem; }
 .pd-map-card h4 {
     font-size: 1rem;
     font-weight: 700;
-    color: var(--secondary);
+    color: #fff;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid var(--bg);
+    border-bottom: 2px solid rgba(255,255,255,0.04);
 }
 
 /* ─── Contact Method Badge ─── */
@@ -399,8 +409,8 @@
     align-items: center;
     gap: 0.25rem;
     font-size: 0.7rem;
-    color: var(--primary);
-    background: var(--primary-light);
+    color: var(--accent);
+    background: rgba(96,165,250,0.1);
     padding: 0.2rem 0.5rem;
     border-radius: 4px;
     font-weight: 500;
@@ -422,7 +432,7 @@
 .pd-loading .spinner {
     width: 2.5rem;
     height: 2.5rem;
-    border: 3px solid var(--border);
+    border: 3px solid rgba(255,255,255,0.06);
     border-top-color: var(--primary);
     border-radius: 50%;
     animation: spin 0.8s linear infinite;
@@ -497,7 +507,7 @@
 
     <div class="pd-content">
         {{-- Main Info --}}
-        <div class="pd-info pd-animate pd-animate-d2">
+        <div class="pd-info glass-card pd-animate pd-animate-d2">
             <h1 class="pd-title">
                 {{ $property->title }}
                 <span class="pd-type-badge">{{ $propertyTypeLabel }}</span>
@@ -635,7 +645,7 @@
         {{-- Sidebar --}}
         <div class="pd-sidebar pd-animate pd-animate-d3">
             {{-- Owner Card --}}
-            <div class="pd-owner-card">
+            <div class="pd-owner-card glass-card">
                 <div class="owner-avatar">
                     {{ substr($property->contact_name, 0, 1) }}{{ strpos($property->contact_name, ' ') !== false ? substr($property->contact_name, strpos($property->contact_name, ' ') + 1, 1) : '' }}
                 </div>
@@ -671,7 +681,7 @@
             </div>
 
             {{-- Rental Summary --}}
-            <div class="pd-summary-card">
+            <div class="pd-summary-card glass-card">
                 <h4>Rental Summary</h4>
                 <div class="pd-summary-row">
                     <span>Monthly Rent</span>
@@ -712,27 +722,27 @@
             </div>
 
             {{-- Location --}}
-            <div class="pd-map-card">
+            <div class="pd-map-card glass-card">
                 <h4>
                     <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
                     Location
                 </h4>
                 <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
-                        <span style="color:var(--text-muted);">Division</span>
-                        <span style="font-weight:600;color:var(--text);">{{ $property->division }}</span>
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
+                        <span style="color:rgba(255,255,255,0.35);">Division</span>
+                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->division }}</span>
                     </div>
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
-                        <span style="color:var(--text-muted);">District</span>
-                        <span style="font-weight:600;color:var(--text);">{{ $property->district }}</span>
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
+                        <span style="color:rgba(255,255,255,0.35);">District</span>
+                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->district }}</span>
                     </div>
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid var(--border);font-size:0.85rem;">
-                        <span style="color:var(--text-muted);">Area</span>
-                        <span style="font-weight:600;color:var(--text);">{{ $property->area_location }}</span>
+                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
+                        <span style="color:rgba(255,255,255,0.35);">Area</span>
+                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->area_location }}</span>
                     </div>
                     <div style="display:flex;flex-direction:column;padding:0.5rem 0;font-size:0.85rem;gap:0.25rem;">
-                        <span style="color:var(--text-muted);">Full Address</span>
-                        <span style="font-weight:600;color:var(--text);">{{ $property->full_address }}</span>
+                        <span style="color:rgba(255,255,255,0.35);">Full Address</span>
+                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->full_address }}</span>
                     </div>
                 </div>
             </div>
