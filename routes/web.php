@@ -4,7 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Frontend\HomeController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\SettingController;
-use App\Http\Controllers\Admin\ContactSettingController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Frontend\ContactMessageController;
 use App\Http\Controllers\Frontend\ToLetAdvertisementController as FrontendToLetController;
@@ -68,10 +67,6 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     // Settings Management
     Route::get('/settings', [SettingController::class, 'index'])->name('settings.index');
     Route::put('/settings', [SettingController::class, 'update'])->name('settings.update');
-
-    // Contact Settings
-    Route::get('/contact-setting', [ContactSettingController::class, 'index'])->name('contact-setting.index');
-    Route::post('/contact-setting', [ContactSettingController::class, 'update'])->name('contact-setting.update');
 
     // Contact Messages
     Route::get('/messages', [AdminMessageController::class, 'index'])->name('messages.index');
