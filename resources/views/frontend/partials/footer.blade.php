@@ -39,7 +39,7 @@
                     <a href="#">Safety Tips</a>
                     <a href="#">Terms of Service</a>
                     <a href="#">Privacy Policy</a>
-                    <a href="#">Contact Us</a>
+                    <a href="{{ route('contact.find') }}">My Messages</a>
                 </div>
                 <div class="footer-col">
                     <h4>Contact Us</h4>

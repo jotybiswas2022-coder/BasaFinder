@@ -38,8 +38,19 @@
                 @endif
             </div>
 
-            <div style="text-align:center; margin-top:2rem;">
-                <a href="{{ route('home') }}" style="display:inline-block; padding:0.75rem 2rem; background:var(--primary); color:#fff; border-radius:var(--r-md); font-weight:600; text-decoration:none;">Back to Home</a>
+            @if(!$message->admin_reply)
+                <div style="background:rgba(245,158,11,0.08); border:1px solid rgba(245,158,11,0.2); border-radius:var(--r-md); padding:1rem 1.25rem; margin-top:1.5rem; text-align:center;">
+                    <p style="font-size:0.8125rem; color:#92400E; font-weight:500;">Save this link to check your reply later:</p>
+                    <p style="font-size:0.75rem; color:var(--primary); word-break:break-all; margin-top:0.375rem; user-select:all;">{{ url()->current() }}</p>
+                </div>
+            @endif
+
+            <div style="text-align:center; margin-top:1.5rem;">
+                <a href="{{ route('contact.find') }}" style="display:inline-block; padding:0.75rem 2rem; background:var(--primary); color:#fff; border-radius:var(--r-md); font-weight:600; text-decoration:none;">My Messages</a>
+            </div>
+
+            <div style="text-align:center; margin-top:0.75rem;">
+                <a href="{{ route('home') }}" style="color:var(--text-muted); font-size:0.875rem; text-decoration:none;">Back to Home</a>
             </div>
         </div>
     </div>
