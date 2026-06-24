@@ -19,6 +19,8 @@
         --primary-light: #DBEAFE;
         --primary-glow: rgba(37,99,235,0.15);
         --primary-pale: rgba(37,99,235,0.06);
+        --secondary:  #0F172A;
+        --accent:     #60A5FA;
         --gold:       #F59E0B;
         --gold-light: #FEF3C7;
         --gold-dark:  #D97706;
