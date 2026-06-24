@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Frontend;
 
 use App\Http\Controllers\Controller;
+use App\Models\Faq;
 use App\Models\Testimonial;
 use App\Models\ToLetAdvertisement;
 use Illuminate\Http\Request;
@@ -25,7 +26,8 @@ class HomeController extends Controller
             ->pluck('total', 'division');
 
         $testimonials = Testimonial::active()->sorted()->get();
+        $faqs = Faq::active()->sorted()->get();
 
-        return view('frontend.home', compact('featuredProperties', 'divisionCounts', 'testimonials'));
+        return view('frontend.home', compact('featuredProperties', 'divisionCounts', 'testimonials', 'faqs'));
     }
 }

@@ -1470,41 +1470,20 @@
         <p>Find answers to the most common questions about renting with BasaFinder.</p>
     </div>
     <div class="faq-list">
-        <div class="faq-item open">
-            <button class="faq-question" onclick="toggleFaq(this)">
-                How do I search for properties on BasaFinder?
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-            <div class="faq-answer"><p>Simply use the search bar on our homepage or browse through categories. You can filter by location, property type, rent range, bedrooms, and more to find exactly what you're looking for.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question" onclick="toggleFaq(this)">
-                Is BasaFinder free to use?
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-            <div class="faq-answer"><p>Yes! Browsing and searching for properties is completely free. Posting a property is also free for basic listings. We offer premium features for enhanced visibility at affordable rates.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question" onclick="toggleFaq(this)">
-                How are properties verified?
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-            <div class="faq-answer"><p>We verify each property through a multi-step process including owner identity verification, property documentation checks, and periodic quality reviews to ensure authenticity.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question" onclick="toggleFaq(this)">
-                Can I post a property for rent?
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-            <div class="faq-answer"><p>Absolutely! Click on "Post Property" in the navigation menu, fill in the details about your property, add photos, and submit. Your listing will go live after our verification process.</p></div>
-        </div>
-        <div class="faq-item">
-            <button class="faq-question" onclick="toggleFaq(this)">
-                How do I contact a property owner?
-                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
-            </button>
-            <div class="faq-answer"><p>On each property detail page, you'll find a "Contact Owner" button. You can send a direct message, call, or WhatsApp the owner through the provided contact information.</p></div>
-        </div>
+        @forelse($faqs as $i => $f)
+            <div class="faq-item {{ $i === 0 ? 'open' : '' }}">
+                <button class="faq-question" onclick="toggleFaq(this)">
+                    {{ $f->question }}
+                    <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+                </button>
+                <div class="faq-answer"><p>{{ $f->answer }}</p></div>
+            </div>
+        @empty
+            <div style="text-align:center; padding:2rem 1rem;">
+                <h3 style="font-size:1rem; font-weight:600; color:var(--secondary);">No FAQs Available</h3>
+                <p style="color:var(--text-muted); font-size:0.875rem;">Check back soon for answers.</p>
+            </div>
+        @endforelse
     </div>
 </section>
 

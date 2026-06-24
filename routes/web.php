@@ -11,6 +11,7 @@ use App\Http\Controllers\Frontend\ToLetAdvertisementController as FrontendToLetC
 use App\Http\Controllers\Admin\ToLetAdvertisementController as AdminToLetController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\Admin\TestimonialController as AdminTestimonialController;
+use App\Http\Controllers\Admin\FaqController as AdminFaqController;
 
 /*
 |--------------------------------------------------------------------------
@@ -85,6 +86,14 @@ Route::middleware(['auth', 'admin'])->prefix('admin')->name('admin.')->group(fun
     Route::get('/testimonials/{id}/edit', [AdminTestimonialController::class, 'edit'])->name('testimonials.edit');
     Route::put('/testimonials/{id}', [AdminTestimonialController::class, 'update'])->name('testimonials.update');
     Route::delete('/testimonials/{id}', [AdminTestimonialController::class, 'destroy'])->name('testimonials.destroy');
+
+    // FAQs
+    Route::get('/faqs', [AdminFaqController::class, 'index'])->name('faqs.index');
+    Route::get('/faqs/create', [AdminFaqController::class, 'create'])->name('faqs.create');
+    Route::post('/faqs', [AdminFaqController::class, 'store'])->name('faqs.store');
+    Route::get('/faqs/{id}/edit', [AdminFaqController::class, 'edit'])->name('faqs.edit');
+    Route::put('/faqs/{id}', [AdminFaqController::class, 'update'])->name('faqs.update');
+    Route::delete('/faqs/{id}', [AdminFaqController::class, 'destroy'])->name('faqs.destroy');
 
     // To-Let Advertisements
     Route::get('/to-let', [AdminToLetController::class, 'index'])->name('to-let.index');

@@ -57,6 +57,12 @@
             </span>
             <span class="sb-item-text">Testimonials</span>
         </a>
+        <a href="{{ route('admin.faqs.index') }}" class="sb-item {{ request()->routeIs('admin.faqs.*') ? 'active' : '' }}">
+            <span class="sb-item-icon" style="background:{{ request()->routeIs('admin.faqs.*') ? 'rgba(16,185,129,0.2)' : 'transparent' }};color:{{ request()->routeIs('admin.faqs.*') ? '#34d399' : '#9ca3af' }};">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 015.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+            </span>
+            <span class="sb-item-text">FAQs</span>
+        </a>
 
         <div class="sb-label">Config</div>
         <a href="{{ route('admin.contact-setting.index') }}" class="sb-item {{ request()->routeIs('admin.contact-setting.*') ? 'active' : '' }}">
