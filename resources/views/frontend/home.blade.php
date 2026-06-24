@@ -734,25 +734,58 @@
     cursor: pointer;
     text-decoration: none;
     transition: all 0.4s cubic-bezier(0.16,1,0.3,1);
-    background: linear-gradient(135deg, #DBEAFE, #BFDBFE);
+    background: rgba(255,255,255,0.04);
+    backdrop-filter: blur(20px) saturate(1.5);
+    -webkit-backdrop-filter: blur(20px) saturate(1.5);
     display: flex;
     align-items: flex-end;
+    border: 1px solid rgba(255,255,255,0.08);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);
 }
-.city-card:hover { transform: translateY(-6px) scale(1.02); box-shadow: 0 20px 50px rgba(0,0,0,0.3); }
-.city-card .city-bg-icon { position: absolute; top: 1rem; right: 1rem; width: 3.5rem; height: 3.5rem; opacity: 0.12; z-index: 1; color: #fff; }
-.city-card .city-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 25%, rgba(15,23,42,0.9)); }
+.city-card::before {
+    content: '';
+    position: absolute; inset: 0; border-radius: var(--r-lg); padding: 1.5px;
+    background: linear-gradient(135deg, rgba(255,255,255,0.06), rgba(37,99,235,0.15), rgba(124,58,237,0.15), rgba(245,158,11,0.1), rgba(255,255,255,0.06));
+    background-size: 400% 400%;
+    animation: cityBorderShift 6s ease-in-out infinite;
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+}
+@keyframes cityBorderShift { 0%,100% { background-position: 0% 50%; } 25% { background-position: 100% 0%; } 50% { background-position: 100% 100%; } 75% { background-position: 0% 100%; } }
+.city-card::after {
+    content: '';
+    position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+    background: radial-gradient(circle at 50% 0%, rgba(96,165,250,0.04) 0%, transparent 50%);
+    animation: cityShine 8s ease-in-out infinite;
+    pointer-events: none;
+}
+@keyframes cityShine {
+    0%,100% { transform: translate(0,0) rotate(0deg); opacity: 0.2; }
+    25%  { transform: translate(10%,-10%) rotate(5deg); opacity: 0.5; }
+    50%  { transform: translate(-5%,5%) rotate(-3deg); opacity: 0.3; }
+    75%  { transform: translate(8%,-8%) rotate(4deg); opacity: 0.6; }
+}
+.city-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 20px 56px rgba(0,0,0,0.35), 0 0 40px rgba(37,99,235,0.08), inset 0 1px 0 rgba(255,255,255,0.1);
+    border-color: rgba(37,99,235,0.25);
+}
+.city-card .city-bg-icon { position: absolute; top: 1rem; right: 1rem; width: 3.5rem; height: 3.5rem; opacity: 0.10; z-index: 1; color: #fff; }
+.city-card .city-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, transparent 20%, rgba(15,23,42,0.85)); }
 .city-card .city-info { position: relative; z-index: 1; padding: 1.25rem 1.25rem 1.5rem; width: 100%; transform: translateY(0); transition: transform 0.4s; }
 .city-card:hover .city-info { transform: translateY(-4px); }
-.city-card .city-info h3 { color: #fff; font-size: 1.125rem; font-weight: 700; font-family: var(--font-serif); }
+.city-card .city-info h3 { color: #fff; font-size: 1.125rem; font-weight: 700; font-family: var(--font-serif); text-shadow: 0 2px 12px rgba(0,0,0,0.3); }
 .city-card .city-info p { color: rgba(147,197,253,0.6); font-size: 0.75rem; margin-top: 0.125rem; }
-.city-card:nth-child(1) { background: linear-gradient(135deg, #1E3A5F, #0F172A); }
-.city-card:nth-child(2) { background: linear-gradient(135deg, #065F46, #047857); }
-.city-card:nth-child(3) { background: linear-gradient(135deg, #4C1D95, #6D28D9); }
-.city-card:nth-child(4) { background: linear-gradient(135deg, #B45309, #D97706); }
-.city-card:nth-child(5) { background: linear-gradient(135deg, #0F172A, #1E293B); }
-.city-card:nth-child(6) { background: linear-gradient(135deg, #1E40AF, #2563EB); }
-.city-card:nth-child(7) { background: linear-gradient(135deg, #065F46, #059669); }
-.city-card:nth-child(8) { background: linear-gradient(135deg, #831843, #BE185D); }
+.city-card:nth-child(1) { background: rgba(30,58,95,0.5); }
+.city-card:nth-child(2) { background: rgba(6,95,70,0.45); }
+.city-card:nth-child(3) { background: rgba(76,29,149,0.5); }
+.city-card:nth-child(4) { background: rgba(180,83,9,0.45); }
+.city-card:nth-child(5) { background: rgba(15,23,42,0.6); }
+.city-card:nth-child(6) { background: rgba(30,64,175,0.5); }
+.city-card:nth-child(7) { background: rgba(6,95,70,0.45); }
+.city-card:nth-child(8) { background: rgba(131,24,67,0.5); }
 
 /* ═══════════════════════════════════════════
    TESTIMONIALS
