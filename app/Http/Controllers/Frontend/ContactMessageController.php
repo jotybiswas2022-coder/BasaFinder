@@ -18,21 +18,8 @@ class ContactMessageController extends Controller
 
         $contactMessage = ContactMessage::create($validated);
 
-        return redirect()->route('contact.my-messages', ['email' => $contactMessage->email])
+        return redirect()->route('home')
             ->with('success', 'Your message has been sent successfully! We will get back to you soon.');
     }
 
-    public function myMessages(Request $request)
-    {
-        $email = $request->query('email');
-        $messages = collect();
-
-        if ($email) {
-            $messages = ContactMessage::where('email', $email)
-                ->latest()
-                ->get();
-        }
-
-        return view('frontend.contact.my-messages', compact('messages', 'email'));
-    }
 }

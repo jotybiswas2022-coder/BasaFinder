@@ -25,7 +25,6 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 |--------------------------------------------------------------------------
 */
 Route::post('/contact/submit', [ContactMessageController::class, 'store'])->name('contact.submit');
-Route::get('/contact/my-messages', [ContactMessageController::class, 'myMessages'])->name('contact.my-messages');
 
 /*
 |--------------------------------------------------------------------------
