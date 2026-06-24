@@ -8,6 +8,55 @@ use Illuminate\Http\Request;
 
 class ToLetAdvertisementController extends Controller
 {
+    public function search(Request $request)
+    {
+        $query = ToLetAdvertisement::approved()->latest();
+
+        if ($request->filled('division')) {
+            $query->where('division', $request->division);
+        }
+        if ($request->filled('property_type')) {
+            $query->where('property_type', $request->property_type);
+        }
+        if ($request->filled('min_rent')) {
+            $query->where('monthly_rent', '>=', $request->min_rent);
+        }
+        if ($request->filled('max_rent')) {
+            $query->where('monthly_rent', '<=', $request->max_rent);
+        }
+        if ($request->filled('bedrooms')) {
+            if ($request->bedrooms === '4+') {
+                $query->where('bedrooms', '>=', 4);
+            } else {
+                $query->where('bedrooms', $request->bedrooms);
+            }
+        }
+        if ($request->filled('bathrooms')) {
+            if ($request->bathrooms === '4+') {
+                $query->where('bathrooms', '>=', 4);
+            } else {
+                $query->where('bathrooms', $request->bathrooms);
+            }
+        }
+        if ($request->filled('furnishing')) {
+            $query->whereIn('furnishing', (array) $request->furnishing);
+        }
+        if ($request->filled('tenant_preference')) {
+            $query->whereIn('tenant_preference', (array) $request->tenant_preference);
+        }
+
+        $sort = $request->get('sort', 'latest');
+        match ($sort) {
+            'price_low'  => $query->orderBy('monthly_rent'),
+            'price_high' => $query->orderBy('monthly_rent', 'desc'),
+            default      => $query->latest(),
+        };
+
+        $properties = $query->paginate(10)->withQueryString();
+
+        return view('frontend.search', compact('properties'));
+    }
+
     public function show($id)
     {
         $property = ToLetAdvertisement::approved()->findOrFail($id);

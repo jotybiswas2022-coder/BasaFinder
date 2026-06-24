@@ -39,7 +39,7 @@ Route::post('/to-let/post', [FrontendToLetController::class, 'store'])->name('to
 | BasaFinder Frontend Pages
 |--------------------------------------------------------------------------
 */
-Route::view('/search', 'frontend.search')->name('search');
+Route::get('/search', [FrontendToLetController::class, 'search'])->name('search');
 Route::get('/property/{id}', [FrontendToLetController::class, 'show'])->name('property-detail');
 Route::get('/post-property', [FrontendToLetController::class, 'postProperty'])->name('post-property');
 Route::post('/post-property', [FrontendToLetController::class, 'storePostProperty'])->name('post-property.store');
