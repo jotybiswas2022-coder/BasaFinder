@@ -223,6 +223,18 @@
 </head>
 <body>
     @include('frontend.partials.nav')
+
+    @if(session('success'))
+        <div style="position:fixed; top:80px; left:50%; transform:translateX(-50%); z-index:9999; background:#10B981; color:#fff; padding:0.875rem 1.5rem; border-radius:12px; font-size:0.875rem; font-weight:500; box-shadow:0 8px 32px rgba(16,185,129,0.3); max-width:90vw; text-align:center; animation:fadeUp 0.3s ease;">
+            {{ session('success') }}
+        </div>
+    @endif
+    @if($errors->any())
+        <div style="position:fixed; top:80px; left:50%; transform:translateX(-50%); z-index:9999; background:#EF4444; color:#fff; padding:0.875rem 1.5rem; border-radius:12px; font-size:0.875rem; font-weight:500; box-shadow:0 8px 32px rgba(239,68,68,0.3); max-width:90vw; text-align:center; animation:fadeUp 0.3s ease;">
+            @foreach($errors->all() as $error) {{ $error }} @if(!$loop->last) · @endif @endforeach
+        </div>
+    @endif
+
     <main>@yield('content')</main>
     @include('frontend.partials.footer')
     @stack('scripts')
