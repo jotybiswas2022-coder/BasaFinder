@@ -379,39 +379,39 @@
 .hero-scene { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; }
 .hero-scene svg { width: 85%; height: 85%; }
 /* ── Original single-pass animations (restarted via JS loop) ── */
-.hero-scene .scene-loop .person-group { animation: walkIn 2s ease-out forwards; }
+.hero-scene .scene-loop .person-group { animation: walkIn 1.2s ease-out forwards; }
 @keyframes walkIn { 0% { transform: translateX(-80px); opacity: 0; } 100% { transform: translateX(0); opacity: 1; } }
-.hero-scene .scene-loop .person-body { animation: bodyBob 0.6s ease-in-out 0s 5; }
+.hero-scene .scene-loop .person-body { animation: bodyBob 0.5s ease-in-out 0s 3; }
 @keyframes bodyBob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-3px); } }
-.hero-scene .scene-loop .person-head { animation: headLook 6s ease-in-out 1s infinite; transform-origin: 120px 112px; }
+.hero-scene .scene-loop .person-head { animation: headLook 3.5s ease-in-out 0.5s infinite; transform-origin: 120px 112px; }
 @keyframes headLook { 0%,100% { transform: rotate(0deg); } 15% { transform: rotate(8deg); } 35% { transform: rotate(-6deg); } 55% { transform: rotate(5deg); } }
-.hero-scene .scene-loop .person-arm { animation: armWave 4s ease-in-out 0.5s infinite; transform-origin: 132px 138px; }
+.hero-scene .scene-loop .person-arm { animation: armWave 2.5s ease-in-out 0.3s infinite; transform-origin: 132px 138px; }
 @keyframes armWave { 0%,100% { transform: rotate(0deg); } 25% { transform: rotate(14deg); } 50% { transform: rotate(-6deg); } 75% { transform: rotate(8deg); } }
-.hero-scene .scene-loop .face-sad { animation: fadeOut 3.5s ease-in-out forwards; }
-@keyframes fadeOut { 0%,70% { opacity: 1; } 100% { opacity: 0; } }
-.hero-scene .scene-loop .face-happy { animation: fadeIn 1s ease-in-out 3s forwards; opacity: 0; }
+.hero-scene .scene-loop .face-sad { animation: fadeOut 2s ease-in-out forwards; }
+@keyframes fadeOut { 0%,65% { opacity: 1; } 100% { opacity: 0; } }
+.hero-scene .scene-loop .face-happy { animation: fadeIn 0.6s ease-in-out 1.8s forwards; opacity: 0; }
 @keyframes fadeIn { 0% { opacity: 0; } 100% { opacity: 1; } }
-.hero-scene .scene-loop .search-glass { animation: glassSweep 4s ease-in-out 1.5s 2; transform-origin: 160px 114px; opacity: 0; animation-fill-mode: forwards; }
+.hero-scene .scene-loop .search-glass { animation: glassSweep 2.5s ease-in-out 0.8s 2; transform-origin: 160px 114px; opacity: 0; animation-fill-mode: forwards; }
 @keyframes glassSweep { 0% { opacity: 0; transform: rotate(0deg); } 10% { opacity: 1; } 25% { transform: rotate(12deg); } 50% { transform: rotate(-12deg); } 75% { transform: rotate(8deg); } 100% { opacity: 1; transform: rotate(0deg); } }
-.hero-scene .scene-loop .glass-hide { animation: glassFadeOut 0.8s ease-in 3.2s forwards; }
+.hero-scene .scene-loop .glass-hide { animation: glassFadeOut 0.5s ease-in 1.9s forwards; }
 @keyframes glassFadeOut { 0% { opacity: 1; } 100% { opacity: 0; transform: scale(0.5); } }
-.hero-scene .scene-loop .house-found { animation: housePop 1s cubic-bezier(0.34,1.56,0.64,1) 2.8s forwards; opacity: 0; transform-origin: 214px 168px; }
+.hero-scene .scene-loop .house-found { animation: housePop 0.6s cubic-bezier(0.34,1.56,0.64,1) 1.6s forwards; opacity: 0; transform-origin: 214px 168px; }
 @keyframes housePop { 0% { opacity: 0; transform: scale(0) rotate(-15deg); } 50% { transform: scale(1.2) rotate(4deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-.hero-scene .scene-loop .happy-jump { animation: jumpHappy 0.6s ease-in-out 3.2s infinite; }
+.hero-scene .scene-loop .happy-jump { animation: jumpHappy 0.4s ease-in-out 1.9s infinite; }
 @keyframes jumpHappy { 0%,100% { transform: translateY(0); } 25% { transform: translateY(-10px); } 50% { transform: translateY(0); } }
-.hero-scene .scene-loop .sparkle { animation: sparklePop 2s ease-out 3.4s infinite; opacity: 0; }
+.hero-scene .scene-loop .sparkle { animation: sparklePop 1.5s ease-out 2s infinite; opacity: 0; }
 @keyframes sparklePop { 0% { opacity: 0; transform: scale(0) rotate(0deg); } 20% { opacity: 1; transform: scale(1.4) rotate(180deg); } 50% { opacity: 0.5; transform: scale(0.7) rotate(360deg); } 100% { opacity: 0; transform: scale(0) rotate(360deg); } }
-.hero-scene .scene-loop .checkmark { animation: checkPop 1s cubic-bezier(0.34,1.56,0.64,1) 3.8s forwards; opacity: 0; transform-origin: 214px 140px; }
+.hero-scene .scene-loop .checkmark { animation: checkPop 0.6s cubic-bezier(0.34,1.56,0.64,1) 2.2s forwards; opacity: 0; transform-origin: 214px 140px; }
 @keyframes checkPop { 0% { opacity: 0; transform: scale(0) rotate(-25deg); } 50% { transform: scale(1.35) rotate(5deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-.hero-scene .scene-loop .found-text { animation: badgeBounce 0.8s cubic-bezier(0.34,1.56,0.64,1) 4.2s forwards; opacity: 0; }
+.hero-scene .scene-loop .found-text { animation: badgeBounce 0.5s cubic-bezier(0.34,1.56,0.64,1) 2.5s forwards; opacity: 0; }
 @keyframes badgeBounce { 0% { opacity: 0; transform: scale(0) translateY(15px); } 50% { transform: scale(1.2); } 100% { opacity: 1; transform: scale(1) translateY(0); } }
-.hero-scene .scene-loop .travel-dot { animation: dotTravel 2s ease-in-out 3s infinite; }
+.hero-scene .scene-loop .travel-dot { animation: dotTravel 1.5s ease-in-out 1.8s infinite; }
 @keyframes dotTravel { 0% { opacity: 0; transform: translateX(0); } 30% { opacity: 0.5; } 70% { opacity: 0.5; } 100% { opacity: 0; transform: translateX(50px); } }
-.hero-scene .scene-loop .point-arm { animation: pointAppear 0.5s ease-out 3.1s forwards; opacity: 0; transform-origin: 132px 138px; }
+.hero-scene .scene-loop .point-arm { animation: pointAppear 0.3s ease-out 1.8s forwards; opacity: 0; transform-origin: 132px 138px; }
 @keyframes pointAppear { 0% { opacity: 0; transform: scale(0.5) rotate(-15deg); } 100% { opacity: 1; transform: scale(1) rotate(0deg); } }
-.hero-scene .scene-loop .raindrop { animation: rainFall 1.5s linear infinite; }
+.hero-scene .scene-loop .raindrop { animation: rainFall 1s linear infinite; }
 @keyframes rainFall { 0% { opacity: 0; transform: translateY(-20px); } 50% { opacity: 0.4; transform: translateY(20px); } 100% { opacity: 0; transform: translateY(40px); } }
-.hero-scene .scene-loop .sunshine { animation: sunGlow 2s ease-in-out 3.5s infinite; opacity: 0; }
+.hero-scene .scene-loop .sunshine { animation: sunGlow 1.5s ease-in-out 2s infinite; opacity: 0; }
 @keyframes sunGlow { 0%,100% { opacity: 0.06; transform: scale(1); } 50% { opacity: 0.15; transform: scale(1.08); } }
 
 /* Free-running background particles */
@@ -1592,7 +1592,7 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
         svg.replaceChild(clone, loopWrap);
         loopWrap = clone;
     }
-    setInterval(restartScene, 8200);
+    setInterval(restartScene, 4800);
 })();
 </script>
 @endpush
