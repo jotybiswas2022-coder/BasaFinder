@@ -1583,15 +1583,16 @@ document.querySelectorAll('.fav-btn').forEach(function(btn) {
 
 // ── Hero Scene Looper ──
 (function() {
-    var loopWrap = document.querySelector('.hero-scene .scene-loop');
+    var svg = document.querySelector('.hero-scene svg');
+    if (!svg) return;
+    var loopWrap = svg.querySelector('.scene-loop');
     if (!loopWrap) return;
-    var parent = loopWrap.parentNode;
     function restartScene() {
         var clone = loopWrap.cloneNode(true);
-        parent.replaceChild(clone, loopWrap);
+        svg.replaceChild(clone, loopWrap);
         loopWrap = clone;
     }
-    setInterval(restartScene, 8500);
+    setInterval(restartScene, 8200);
 })();
 </script>
 @endpush
