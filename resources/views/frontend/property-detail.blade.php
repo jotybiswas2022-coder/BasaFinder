@@ -6,21 +6,21 @@
 <style>
 body { background: var(--navy); }
 
-/* ─── Animations ─── */
+/* ── Animations ── */
 @keyframes fadeUp {
     from { opacity: 0; transform: translateY(24px); }
     to   { opacity: 1; transform: translateY(0); }
 }
-@keyframes slideLeft {
-    from { opacity: 0; transform: translateX(30px); }
-    to   { opacity: 1; transform: translateX(0); }
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
 }
 .pd-animate { animation: fadeUp 0.6s ease-out both; }
 .pd-animate-d1 { animation-delay: 0.1s; }
 .pd-animate-d2 { animation-delay: 0.2s; }
 .pd-animate-d3 { animation-delay: 0.3s; }
 
-/* ─── Glass Card ─── */
+/* ── Glass Card ── */
 .glass-card {
     background: linear-gradient(135deg, rgba(15,23,42,0.55), rgba(15,23,42,0.7));
     backdrop-filter: blur(40px) saturate(1.4);
@@ -45,88 +45,83 @@ body { background: var(--navy); }
 }
 .glass-card:hover { box-shadow: 0 12px 48px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.08); transform: translateY(-2px); }
 
-/* ─── Breadcrumb ─── */
+/* ── Breadcrumb ── */
 .pd-breadcrumb {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 1rem 1.5rem 0;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    font-size: 0.8125rem;
-    color: rgba(255,255,255,0.4);
+    max-width: 1280px; margin: 0 auto;
+    padding: 1.25rem 1.5rem 0;
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.8125rem; color: rgba(255,255,255,0.4);
 }
 .pd-breadcrumb a { color: rgba(255,255,255,0.4); text-decoration: none; transition: color 0.2s; }
 .pd-breadcrumb a:hover { color: var(--accent); }
 .pd-breadcrumb .sep { color: rgba(255,255,255,0.15); }
 
-/* ─── Layout ─── */
-.pd-wrap {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 1.5rem 1.5rem 3rem;
-}
+/* ── Layout ── */
+.pd-wrap { max-width: 1280px; margin: 0 auto; padding: 1.5rem 1.5rem 3rem; }
 
-/* ─── Gallery ─── */
-.pd-gallery {
-    margin-bottom: 2rem;
-}
+/* ── Gallery ── */
+.pd-gallery { margin-bottom: 2rem; }
 .pd-gallery .gallery-main {
     position: relative;
     background: linear-gradient(135deg, #1E293B, #0F172A);
     border-radius: 20px;
     overflow: hidden;
     height: 460px;
-    box-shadow: 0 4px 24px rgba(0,0,0,0.2);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.pd-gallery .gallery-main::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.35) 0%, transparent 40%);
+    pointer-events: none; z-index: 1;
 }
 .pd-gallery .gallery-main img {
-    width: 100%;
-    height: 100%;
+    width: 100%; height: 100%;
     object-fit: cover;
-    transition: opacity 0.35s ease;
+    transition: transform 0.7s cubic-bezier(0.16,1,0.3,1), opacity 0.35s ease;
 }
+.pd-gallery .gallery-main:hover img { transform: scale(1.03); }
 .pd-gallery .gallery-counter {
     position: absolute;
-    bottom: 16px;
-    right: 16px;
-    background: rgba(0,0,0,0.6);
-    backdrop-filter: blur(8px);
+    bottom: 16px; right: 16px;
+    background: rgba(0,0,0,0.5);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
     color: #fff;
     padding: 0.375rem 0.875rem;
     border-radius: 8px;
     font-size: 0.8125rem;
-    font-weight: 500;
+    font-weight: 600;
     z-index: 2;
-    letter-spacing: 0.03em;
-    border: 1px solid rgba(255,255,255,0.06);
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(255,255,255,0.08);
 }
 .gallery-badges {
     position: absolute;
-    top: 16px;
-    left: 16px;
-    display: flex;
-    gap: 0.5rem;
-    z-index: 2;
-    flex-wrap: wrap;
+    top: 16px; left: 16px;
+    display: flex; gap: 0.5rem;
+    z-index: 2; flex-wrap: wrap;
 }
 .gallery-badge {
     padding: 0.375rem 0.75rem;
     border-radius: 6px;
-    font-size: 0.75rem;
-    font-weight: 600;
-    backdrop-filter: blur(4px);
+    font-size: 0.6875rem;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
-.gallery-badge.featured { background: rgba(245,158,11,0.9); color: #fff; }
-.gallery-badge.verified { background: rgba(16,185,129,0.9); color: #fff; }
-.gallery-badge.new { background: rgba(37,99,235,0.9); color: #fff; }
+.gallery-badge.featured { background: rgba(245,158,11,0.85); color: #fff; box-shadow: 0 2px 8px rgba(245,158,11,0.2); }
+.gallery-badge.verified { background: rgba(16,185,129,0.85); color: #fff; box-shadow: 0 2px 8px rgba(16,185,129,0.2); }
 .gallery-badge.type {
-    background: rgba(0,0,0,0.6);
+    background: rgba(0,0,0,0.5);
     color: #fff;
-    border: 1px solid rgba(255,255,255,0.08);
+    border: 1px solid rgba(255,255,255,0.1);
+    backdrop-filter: blur(8px);
 }
 .pd-gallery .gallery-thumbs {
-    display: flex;
-    gap: 0.625rem;
+    display: flex; gap: 0.625rem;
     margin-top: 0.75rem;
     padding: 0.75rem;
     background: rgba(15,23,42,0.4);
@@ -136,25 +131,35 @@ body { background: var(--navy); }
     border-radius: 14px;
     overflow-x: auto;
 }
+.pd-gallery .gallery-thumbs::-webkit-scrollbar { height: 4px; }
+.pd-gallery .gallery-thumbs::-webkit-scrollbar-track { background: transparent; }
+.pd-gallery .gallery-thumbs::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 4px; }
 .pd-gallery .gallery-thumbs .thumb {
     flex-shrink: 0;
-    width: 96px;
-    height: 72px;
+    width: 96px; height: 72px;
     border-radius: 10px;
     overflow: hidden;
     cursor: pointer;
     border: 2px solid transparent;
-    transition: border-color 0.2s, transform 0.2s;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
     background: linear-gradient(135deg, #1E293B, #0F172A);
+    position: relative;
 }
+.pd-gallery .gallery-thumbs .thumb::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: linear-gradient(0deg, rgba(0,0,0,0.2), transparent 50%);
+    opacity: 0; transition: opacity 0.3s;
+}
+.pd-gallery .gallery-thumbs .thumb:hover::after { opacity: 1; }
 .pd-gallery .gallery-thumbs .thumb:hover {
     border-color: var(--primary);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba(37,99,235,0.2);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 24px rgba(37,99,235,0.2);
 }
 .pd-gallery .gallery-thumbs .thumb.active {
     border-color: var(--primary);
-    box-shadow: 0 0 0 3px rgba(37,99,235,0.3);
+    box-shadow: 0 0 0 3px rgba(37,99,235,0.3), 0 4px 16px rgba(37,99,235,0.15);
 }
 .pd-gallery .gallery-thumbs .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
 @media (max-width: 768px) {
@@ -162,7 +167,7 @@ body { background: var(--navy); }
     .pd-gallery .gallery-thumbs .thumb { width: 72px; height: 56px; }
 }
 
-/* ─── Content ─── */
+/* ── Content ── */
 .pd-content {
     display: grid;
     grid-template-columns: 1fr 380px;
@@ -171,7 +176,7 @@ body { background: var(--navy); }
 }
 @media (max-width: 1024px) { .pd-content { grid-template-columns: 1fr; } }
 
-/* ─── Info Panel ─── */
+/* ── Info Panel ── */
 .pd-info { padding: 2rem; }
 .pd-info .pd-title {
     font-size: 1.625rem;
@@ -182,25 +187,27 @@ body { background: var(--navy); }
 }
 .pd-info .pd-title .pd-type-badge {
     display: inline-block;
-    font-size: 0.7rem;
-    font-weight: 600;
+    font-size: 0.65rem;
+    font-weight: 700;
     color: var(--accent);
-    background: rgba(96,165,250,0.12);
-    padding: 0.15rem 0.5rem;
+    background: rgba(96,165,250,0.1);
+    padding: 0.2rem 0.5rem;
     border-radius: 4px;
     vertical-align: middle;
     margin-left: 0.5rem;
     text-transform: uppercase;
-    letter-spacing: 0.03em;
+    letter-spacing: 0.04em;
+    border: 1px solid rgba(96,165,250,0.08);
 }
 .pd-info .pd-address {
     display: flex;
     align-items: center;
     gap: 0.375rem;
-    color: rgba(255,255,255,0.4);
+    color: rgba(255,255,255,0.35);
     font-size: 0.875rem;
     margin-bottom: 1.25rem;
 }
+.pd-info .pd-address svg { color: var(--primary); flex-shrink: 0; }
 .pd-info .pd-price-row {
     display: flex;
     align-items: baseline;
@@ -211,32 +218,38 @@ body { background: var(--navy); }
 .pd-info .pd-price-row .price {
     font-size: 2rem;
     font-weight: 800;
-    color: var(--primary);
+    background: linear-gradient(135deg, #60A5FA, #A78BFA);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 .pd-info .pd-price-row .price small {
-    font-size: 0.875rem;
-    font-weight: 400;
+    font-size: 0.8125rem;
+    font-weight: 500;
+    -webkit-text-fill-color: rgba(255,255,255,0.3);
     color: rgba(255,255,255,0.3);
 }
 .pd-info .pd-price-row .status {
     padding: 0.25rem 0.75rem;
     border-radius: 9999px;
-    font-size: 0.75rem;
-    font-weight: 600;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    letter-spacing: 0.03em;
+    text-transform: uppercase;
 }
-.status-approved { background: rgba(16,185,129,0.15); color: #34D399; border: 1px solid rgba(16,185,129,0.2); }
-.status-pending { background: rgba(245,158,11,0.15); color: #FBBF24; border: 1px solid rgba(245,158,11,0.2); }
-.status-rejected { background: rgba(239,68,68,0.15); color: #F87171; border: 1px solid rgba(239,68,68,0.2); }
+.status-approved { background: rgba(16,185,129,0.12); color: #34D399; border: 1px solid rgba(16,185,129,0.15); }
+.status-pending { background: rgba(245,158,11,0.12); color: #FBBF24; border: 1px solid rgba(245,158,11,0.15); }
+.status-rejected { background: rgba(239,68,68,0.12); color: #F87171; border: 1px solid rgba(239,68,68,0.15); }
 
-/* ─── Meta Grid ─── */
+/* ── Meta Grid ── */
 .pd-meta-grid {
     display: flex;
     flex-wrap: nowrap;
     gap: 0.5rem;
-    padding: 1.25rem;
-    background: rgba(255,255,255,0.03);
+    padding: 1.25rem 1rem;
+    background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 12px;
+    border-radius: 14px;
     margin-bottom: 1.5rem;
     justify-content: space-around;
 }
@@ -245,23 +258,27 @@ body { background: var(--navy); }
     min-width: 0;
     text-align: center;
     padding: 0.5rem;
+    transition: transform 0.3s ease;
 }
+.pd-meta-item:hover { transform: translateY(-2px); }
 .pd-meta-item .pm-icon {
     color: var(--primary);
-    margin-bottom: 0.25rem;
+    margin-bottom: 0.375rem;
+    opacity: 0.8;
 }
 .pd-meta-item .pm-value {
-    font-size: 1rem;
+    font-size: 1.0625rem;
     font-weight: 700;
     color: #fff;
 }
 .pd-meta-item .pm-label {
-    font-size: 0.7rem;
-    color: rgba(255,255,255,0.35);
+    font-size: 0.6875rem;
+    color: rgba(255,255,255,0.3);
     margin-top: 0.125rem;
+    letter-spacing: 0.02em;
 }
 
-/* ─── Sections ─── */
+/* ── Sections ── */
 .pd-section { margin-bottom: 2rem; }
 .pd-section:last-child { margin-bottom: 0; }
 .pd-section h3 {
@@ -269,8 +286,8 @@ body { background: var(--navy); }
     font-weight: 700;
     color: #fff;
     margin-bottom: 0.875rem;
-    padding-bottom: 0.5rem;
-    border-bottom: 2px solid rgba(255,255,255,0.04);
+    padding-bottom: 0.625rem;
+    border-bottom: 1px solid rgba(255,255,255,0.04);
     display: flex;
     align-items: center;
     gap: 0.5rem;
@@ -278,66 +295,74 @@ body { background: var(--navy); }
 .pd-section h3 svg { color: var(--primary); }
 .pd-section p, .pd-section li {
     font-size: 0.9375rem;
-    color: rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.5);
     line-height: 1.75;
 }
 .pd-desc {
     font-size: 0.9375rem;
-    color: rgba(255,255,255,0.6);
-    line-height: 1.75;
+    color: rgba(255,255,255,0.5);
+    line-height: 1.8;
     white-space: pre-line;
 }
 
-/* ─── Detail List ─── */
+/* ── Detail List ── */
 .pd-details-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 0.5rem;
+    gap: 0.625rem;
 }
 .pd-detail-item {
     display: flex;
     justify-content: space-between;
     padding: 0.5rem 0.75rem;
-    background: rgba(255,255,255,0.03);
+    background: rgba(255,255,255,0.02);
     border: 1px solid rgba(255,255,255,0.04);
-    border-radius: 8px;
+    border-radius: 10px;
     font-size: 0.85rem;
+    transition: all 0.25s;
 }
-.pd-detail-item .dd-label { color: rgba(255,255,255,0.35); }
+.pd-detail-item:hover {
+    background: rgba(96,165,250,0.04);
+    border-color: rgba(96,165,250,0.1);
+}
+.pd-detail-item .dd-label { color: rgba(255,255,255,0.3); }
 .pd-detail-item .dd-value { font-weight: 600; color: rgba(255,255,255,0.75); }
 
-/* ─── Sidebar ─── */
+/* ── Sidebar ── */
 .pd-sidebar { display: flex; flex-direction: column; gap: 1.25rem; }
 
-/* ─── Owner Card ─── */
+/* ── Owner Card ── */
 .pd-owner-card { padding: 1.5rem; text-align: center; }
 .pd-owner-card .owner-avatar {
-    width: 4rem;
-    height: 4rem;
+    width: 4.5rem;
+    height: 4.5rem;
     border-radius: 50%;
-    background: linear-gradient(135deg, rgba(96,165,250,0.15), rgba(167,139,250,0.1));
+    background: linear-gradient(135deg, rgba(96,165,250,0.12), rgba(167,139,250,0.08));
     color: var(--accent);
     display: flex;
     align-items: center;
     justify-content: center;
-    font-weight: 700;
-    font-size: 1.375rem;
+    font-weight: 800;
+    font-size: 1.5rem;
     margin: 0 auto 0.75rem;
+    border: 2px solid rgba(96,165,250,0.08);
+    transition: border-color 0.3s;
 }
-.pd-owner-card h4 { font-size: 1.0625rem; font-weight: 700; color: #fff; margin-bottom: 0.125rem; }
+.pd-owner-card:hover .owner-avatar { border-color: rgba(96,165,250,0.2); }
+.pd-owner-card h4 { font-size: 1.125rem; font-weight: 700; color: #fff; margin-bottom: 0.125rem; }
 .pd-owner-card .owner-label {
     font-size: 0.75rem;
-    color: rgba(255,255,255,0.35);
+    color: rgba(255,255,255,0.3);
     margin-bottom: 0.75rem;
 }
 .pd-owner-card .owner-status {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.375rem;
     font-size: 0.75rem;
     color: #34D399;
-    font-weight: 500;
-    margin-bottom: 1rem;
+    font-weight: 600;
+    margin-bottom: 1.125rem;
 }
 .pd-owner-card .owner-status .dot {
     width: 0.375rem;
@@ -347,7 +372,7 @@ body { background: var(--navy); }
     animation: pulse-dot2 2s ease-in-out infinite;
 }
 @keyframes pulse-dot2 { 0%,100% { opacity: 1; } 50% { opacity: 0.5; } }
-.pd-owner-card .owner-contact { display: flex; flex-direction: column; gap: 0.625rem; }
+.pd-owner-card .owner-contact { display: flex; flex-direction: column; gap: 0.75rem; }
 .pd-owner-card .owner-contact a,
 .pd-owner-card .owner-contact button {
     display: flex;
@@ -359,19 +384,19 @@ body { background: var(--navy); }
     font-size: 0.875rem;
     font-weight: 600;
     text-decoration: none;
-    transition: all 0.25s;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
     border: none;
     cursor: pointer;
     font-family: var(--font);
 }
-.pd-owner-card .owner-contact .btn-call { background: var(--primary); color: #fff; }
-.pd-owner-card .owner-contact .btn-call:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,99,235,0.3); }
+.pd-owner-card .owner-contact .btn-call { background: linear-gradient(135deg, var(--primary), #4F46E5); color: #fff; }
+.pd-owner-card .owner-contact .btn-call:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,99,235,0.35); }
 .pd-owner-card .owner-contact .btn-whatsapp { background: #25D366; color: #fff; }
-.pd-owner-card .owner-contact .btn-whatsapp:hover { background: #1DA851; transform: translateY(-1px); box-shadow: 0 4px 14px rgba(37,165,82,0.3); }
-.pd-owner-card .owner-contact .btn-email { background: rgba(255,255,255,0.04); color: rgba(255,255,255,0.6); border: 1px solid rgba(255,255,255,0.06); }
-.pd-owner-card .owner-contact .btn-email:hover { background: rgba(37,99,235,0.1); color: var(--accent); border-color: rgba(37,99,235,0.2); }
+.pd-owner-card .owner-contact .btn-whatsapp:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(37,165,82,0.3); }
+.pd-owner-card .owner-contact .btn-email { background: rgba(255,255,255,0.03); color: rgba(255,255,255,0.5); border: 1px solid rgba(255,255,255,0.06); }
+.pd-owner-card .owner-contact .btn-email:hover { background: rgba(96,165,250,0.08); color: var(--accent); border-color: rgba(96,165,250,0.15); transform: translateY(-1px); }
 
-/* ─── Summary Card ─── */
+/* ── Summary Card ── */
 .pd-summary-card { padding: 1.5rem; }
 .pd-summary-card h4 {
     font-size: 1rem;
@@ -379,20 +404,24 @@ body { background: var(--navy); }
     color: #fff;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
+.pd-summary-card h4 svg { color: var(--primary); }
 .pd-summary-row {
     display: flex;
     justify-content: space-between;
-    padding: 0.5rem 0;
+    padding: 0.55rem 0;
     font-size: 0.85rem;
-    color: rgba(255,255,255,0.35);
-    border-bottom: 1px solid rgba(255,255,255,0.04);
+    color: rgba(255,255,255,0.3);
+    border-bottom: 1px solid rgba(255,255,255,0.03);
 }
 .pd-summary-row:last-child { border-bottom: none; }
-.pd-summary-row .sv-value { font-weight: 600; color: rgba(255,255,255,0.75); }
+.pd-summary-row .sv-value { font-weight: 600; color: rgba(255,255,255,0.8); }
 
-/* ─── Location Card ─── */
+/* ── Location Card ── */
 .pd-map-card { padding: 1.5rem; }
 .pd-map-card h4 {
     font-size: 1rem;
@@ -400,45 +429,57 @@ body { background: var(--navy); }
     color: #fff;
     margin-bottom: 1rem;
     padding-bottom: 0.75rem;
-    border-bottom: 2px solid rgba(255,255,255,0.04);
+    border-bottom: 1px solid rgba(255,255,255,0.04);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
 }
+.pd-map-card h4 svg { color: var(--primary); }
+.pd-map-loc-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 0.55rem 0;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+    font-size: 0.85rem;
+}
+.pd-map-loc-row:last-child { border-bottom: none; }
+.pd-map-loc-row .ml-label { color: rgba(255,255,255,0.3); }
+.pd-map-loc-row .ml-value { font-weight: 600; color: rgba(255,255,255,0.8); }
+.pd-map-fulladdr {
+    display: flex; flex-direction: column;
+    padding: 0.55rem 0;
+    font-size: 0.85rem;
+    gap: 0.25rem;
+}
+.pd-map-fulladdr .ml-label { color: rgba(255,255,255,0.3); }
+.pd-map-fulladdr .ml-value { font-weight: 600; color: rgba(255,255,255,0.8); line-height: 1.5; }
 
-/* ─── Contact Method Badge ─── */
+/* ── Contact Method Badge ── */
 .contact-method-badge {
     display: inline-flex;
     align-items: center;
-    gap: 0.25rem;
-    font-size: 0.7rem;
+    gap: 0.375rem;
+    font-size: 0.6875rem;
     color: var(--accent);
-    background: rgba(96,165,250,0.1);
-    padding: 0.2rem 0.5rem;
-    border-radius: 4px;
-    font-weight: 500;
+    background: rgba(96,165,250,0.08);
+    padding: 0.25rem 0.625rem;
+    border-radius: 6px;
+    font-weight: 600;
+    border: 1px solid rgba(96,165,250,0.08);
 }
 
-/* ─── CTA Button ─── */
+/* ── CTA Button ── */
 .pd-cta-btn {
     width: 100%;
     justify-content: center;
-    padding: 0.875rem;
-    font-size: 0.9375rem;
+    padding: 1rem;
+    font-size: 1rem;
+    border-radius: 12px;
+    background: linear-gradient(135deg, var(--primary), #4F46E5);
+    border: none;
+    transition: all 0.3s cubic-bezier(0.16,1,0.3,1);
 }
-
-/* ─── Loading State ─── */
-.pd-loading {
-    text-align: center;
-    padding: 4rem 2rem;
-}
-.pd-loading .spinner {
-    width: 2.5rem;
-    height: 2.5rem;
-    border: 3px solid rgba(255,255,255,0.06);
-    border-top-color: var(--primary);
-    border-radius: 50%;
-    animation: spin 0.8s linear infinite;
-    margin: 0 auto 1rem;
-}
-@keyframes spin { to { transform: rotate(360deg); } }
+.pd-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(37,99,235,0.35); }
 </style>
 @endpush
 
@@ -682,7 +723,7 @@ body { background: var(--navy); }
 
             {{-- Rental Summary --}}
             <div class="pd-summary-card glass-card">
-                <h4>Rental Summary</h4>
+                <h4><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><rect x="2" y="3" width="20" height="14" rx="2"/><line x1="2" y1="20" x2="22" y2="20"/></svg> Rental Summary</h4>
                 <div class="pd-summary-row">
                     <span>Monthly Rent</span>
                     <span class="sv-value">BDT {{ number_format($property->monthly_rent) }}</span>
@@ -723,32 +764,29 @@ body { background: var(--navy); }
 
             {{-- Location --}}
             <div class="pd-map-card glass-card">
-                <h4>
-                    <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2" style="vertical-align:middle;margin-right:6px;"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
-                    Location
-                </h4>
-                <div style="display:flex;flex-direction:column;gap:0.5rem;">
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
-                        <span style="color:rgba(255,255,255,0.35);">Division</span>
-                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->division }}</span>
+                <h4><svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg> Location</h4>
+                <div style="display:flex;flex-direction:column;">
+                    <div class="pd-map-loc-row">
+                        <span class="ml-label">Division</span>
+                        <span class="ml-value">{{ $property->division }}</span>
                     </div>
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
-                        <span style="color:rgba(255,255,255,0.35);">District</span>
-                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->district }}</span>
+                    <div class="pd-map-loc-row">
+                        <span class="ml-label">District</span>
+                        <span class="ml-value">{{ $property->district }}</span>
                     </div>
-                    <div style="display:flex;justify-content:space-between;padding:0.5rem 0;border-bottom:1px solid rgba(255,255,255,0.04);font-size:0.85rem;">
-                        <span style="color:rgba(255,255,255,0.35);">Area</span>
-                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->area_location }}</span>
+                    <div class="pd-map-loc-row">
+                        <span class="ml-label">Area</span>
+                        <span class="ml-value">{{ $property->area_location }}</span>
                     </div>
-                    <div style="display:flex;flex-direction:column;padding:0.5rem 0;font-size:0.85rem;gap:0.25rem;">
-                        <span style="color:rgba(255,255,255,0.35);">Full Address</span>
-                        <span style="font-weight:600;color:rgba(255,255,255,0.75);">{{ $property->full_address }}</span>
+                    <div class="pd-map-fulladdr">
+                        <span class="ml-label">Full Address</span>
+                        <span class="ml-value">{{ $property->full_address }}</span>
                     </div>
                 </div>
             </div>
 
             {{-- CTA --}}
-            <a href="tel:{{ $property->contact_phone }}" class="btn btn-primary pd-cta-btn">
+            <a href="tel:{{ $property->contact_phone }}" class="pd-cta-btn btn btn-primary">
                 <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 16.92z"/></svg>
                 Call to Inquire
             </a>
