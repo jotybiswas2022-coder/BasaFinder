@@ -7,11 +7,15 @@
 .policy-section {
     padding: 4rem 0;
     min-height: 60vh;
+    background: linear-gradient(135deg, #070b17 0%, #0d1225 40%, #0a1628 70%, #0f1a30 100%);
+    position: relative;
 }
 .policy-container {
     max-width: 800px;
     margin: 0 auto;
     padding: 0 1rem;
+    position: relative;
+    z-index: 1;
 }
 .policy-header {
     text-align: center;
@@ -20,11 +24,11 @@
 .policy-header h1 {
     font-size: 2rem;
     font-weight: 800;
-    color: #111827;
+    color: #fff;
     letter-spacing: -0.03em;
 }
 .policy-header p {
-    color: #9ca3af;
+    color: rgba(255,255,255,0.4);
     font-size: 0.875rem;
     margin-top: 0.375rem;
 }
@@ -36,19 +40,20 @@
     margin: 1rem auto 0;
 }
 .policy-content {
-    background: #fff;
-    border: 1px solid #e5e7eb;
+    background: rgba(255,255,255,0.04);
+    border: 1px solid rgba(255,255,255,0.08);
     border-radius: 1rem;
     padding: 2.5rem;
-    box-shadow: 0 1px 3px rgba(0,0,0,0.04);
+    box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.05);
+    backdrop-filter: blur(12px);
     line-height: 1.8;
-    color: #374151;
+    color: rgba(255,255,255,0.75);
     font-size: 0.9375rem;
 }
 .policy-content h2 {
     font-size: 1.25rem;
     font-weight: 700;
-    color: #111827;
+    color: #fff;
     margin-top: 2rem;
     margin-bottom: 0.75rem;
 }
@@ -65,10 +70,11 @@
 .policy-content ul li {
     margin-bottom: 0.375rem;
     list-style-type: disc;
+    color: rgba(255,255,255,0.75);
 }
 .policy-content strong {
     font-weight: 600;
-    color: #111827;
+    color: #fff;
 }
 @media (max-width: 640px) {
     .policy-section { padding: 2rem 0; }
