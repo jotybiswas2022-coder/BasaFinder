@@ -77,6 +77,15 @@
             </span>
             <span class="sb-item-text">Settings</span>
         </a>
+
+        <div style="height:1px; background:rgba(255,255,255,0.06); margin:0.5rem 0.75rem;"></div>
+
+        <a href="{{ url('/') }}" target="_blank" class="sb-item">
+            <span class="sb-item-icon" style="background:transparent;color:#34d399;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </span>
+            <span class="sb-item-text" style="color:#34d399;">Visit Site</span>
+        </a>
     </nav>
 
 
