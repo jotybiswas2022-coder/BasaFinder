@@ -93,7 +93,8 @@
     .tl-hero .hero-btn { padding:0.5rem 0.875rem; font-size:0.75rem; }
     .tl-hero .hero-btn svg { width:12px; height:12px; }
     .tl-card { border-radius:0.625rem; }
-    .tl-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .tl-table-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; transform:rotateX(180deg); }
+    .tl-table-wrap > table { transform:rotateX(180deg); }
     .tl-table { min-width:600px; }
     .tl-swipe-hint { display:block; }
     .tl-table th { padding:0.625rem 0.875rem; font-size:0.65rem; }

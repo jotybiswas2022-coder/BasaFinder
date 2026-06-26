@@ -444,7 +444,8 @@
     .d-ov .ov-card .ov-l { font-size:0.6rem; }
     .d-ov .ov-card .ov-v { font-size:1rem; }
     .d-tbl { border-radius:0.625rem; }
-    .d-tbl-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; }
+    .d-tbl-wrap { overflow-x:auto; -webkit-overflow-scrolling:touch; transform:rotateX(180deg); }
+    .d-tbl-wrap > table { transform:rotateX(180deg); }
     .d-swipe-hint { display:block; text-align:center; font-size:0.6rem; color:#94a3b8; padding:0.375rem; background:#f8fafc; border-bottom:1px solid #f1f5f9; letter-spacing:0.05em; }
     .d-tbl table { min-width:380px; }
     .d-tbl .dt-h { padding:0.75rem 0.875rem; }
