@@ -63,6 +63,39 @@
 .star-rating input { display: none; }
 .star-rating label { font-size: 1.75rem; color: #d1d5db; cursor: pointer; transition: color 0.15s; }
 .star-rating label:hover, .star-rating label:hover ~ label, .star-rating input:checked ~ label { color: #f59e0b; }
+
+@media (max-width:768px) {
+    .tl-hero { margin:-1rem -1rem 1rem; padding:1.25rem 1rem 1.5rem; }
+    .tl-hero h1 { font-size:1.2rem; }
+    .tl-hero p { font-size:0.75rem; }
+    .tf-card { padding:1.25rem; border-radius:0.625rem; }
+    .tf-row { grid-template-columns:1fr; gap:0.875rem; }
+    .tf-group { margin-bottom:0.875rem; }
+    .tf-group label { font-size:0.75rem; }
+    .tf-group input, .tf-group textarea, .tf-group select { padding:0.5rem 0.75rem; font-size:0.8125rem; }
+    .tf-group textarea { min-height:100px; }
+    .tf-actions { flex-direction:column; gap:0.625rem; margin-top:1.25rem; padding-top:1.25rem; }
+    .tf-actions a, .tf-actions button { justify-content:center; width:100%; }
+}
+@media (max-width:480px) {
+    .tl-hero { margin:-0.75rem -0.5rem 0.75rem; padding:1rem 0.75rem 1.25rem; }
+    .tl-hero h1 { font-size:1rem; }
+    .tl-hero p { font-size:0.6875rem; }
+    .tf-card { padding:0.875rem; border-radius:0.5rem; }
+    .tf-row { gap:0.625rem; }
+    .tf-group { margin-bottom:0.625rem; }
+    .tf-group label { font-size:0.6875rem; margin-bottom:0.25rem; }
+    .tf-group input, .tf-group textarea, .tf-group select { padding:0.4375rem 0.625rem; font-size:0.75rem; border-radius:0.375rem; }
+    .tf-group textarea { min-height:84px; }
+    .tf-hint { font-size:0.625rem; }
+    .tf-check { padding-top:0; }
+    .tf-check input[type="checkbox"] { width:1rem; height:1rem; }
+    .tf-check label { font-size:0.75rem; }
+    .tf-actions { gap:0.5rem; margin-top:1rem; padding-top:1rem; }
+    .tf-btn-primary, .tf-btn-secondary { padding:0.5rem 1rem; font-size:0.75rem; }
+    .tf-btn-primary svg, .tf-btn-secondary svg { width:12px; height:12px; }
+    .star-rating label { font-size:1.375rem; }
+}
 </style>
 @endpush
 
