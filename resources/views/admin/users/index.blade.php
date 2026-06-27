@@ -23,6 +23,13 @@
 .tl-hero .hero-content { flex: 1; min-width: 0; }
 .tl-hero h1 { color: #fff; font-size: 1.375rem; font-weight: 800; letter-spacing: -0.03em; }
 .tl-hero p { color: rgba(255,255,255,0.5); font-size: 0.8125rem; margin-top: 0.125rem; }
+.tl-hero .hero-btn {
+    display: inline-flex; align-items: center; gap: 0.375rem;
+    padding: 0.5rem 1.125rem; background: #6366f1; color: #fff;
+    border-radius: 0.5rem; font-size: 0.8125rem; font-weight: 600;
+    text-decoration: none; transition: all 0.2s; white-space: nowrap;
+}
+.tl-hero .hero-btn:hover { background: #4f46e5; transform: translateY(-1px); }
 
 .user-list { display: flex; flex-direction: column; gap: 0.625rem; }
 .user-row {
@@ -72,6 +79,10 @@
             <h1>Users</h1>
             <p>Manage registered users (excluding admins).</p>
         </div>
+        <a href="{{ route('admin.users.create') }}" class="hero-btn">
+            <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24" stroke-width="2.5"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+            Add User
+        </a>
     </div>
 </div>
 
